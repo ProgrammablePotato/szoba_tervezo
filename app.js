@@ -4,6 +4,7 @@ const Heightin = document.getElementById("Height")
 const CalcButton = document.getElementById("accept_button")
 const DoorButton = document.getElementById("dooradd")
 const WindowButton = document.getElementById("windowadd")
+const RoomDrawing = document.getElementById("room-drawing")
 
 var floor_area = 0
 var wall_area = 0
@@ -21,6 +22,12 @@ DoorButton.addEventListener("click", () => {
 WindowButton.addEventListener("click", () => {
     AddOpening(2)
 })
+
+function AutoResizeF() {
+    let side1 = Number(Side1in.value)
+    let side2 = Number(Side2in.value)
+    SizeRoom(side1,side2)
+}
 
 function Calc() {
     
@@ -118,10 +125,14 @@ function AddOpening(type) {
 }
 
 function SizeRoom(side1,side2) {
-    console.log(side1)
-    console.log(side2)
     var ratio = (Math.min(side1,side2)/Math.max(side1,side2))
-    console.log(ratio)
-    document.getElementById("room").style.height = String(100*ratio)+"%"
-    document.getElementById("room").style.width = String(100)+"%"
+    var boxwidth = document.getElementById("room-drawing").clientWidth
+    var boxheight = document.getElementById("room-drawing").clientHeight
+    var topmargin = (boxheight/2)-10-((boxwidth*ratio*0.8)/2)
+    if (topmargin < 0) {
+        topmargin = 0
+    }
+    document.getElementById("room").style.height = String(boxwidth*ratio*0.8)+"px"
+    document.getElementById("room").style.width = String(boxwidth*0.8)+"px"
+    document.getElementById("room").style.marginTop = String(topmargin)+"px"
 }

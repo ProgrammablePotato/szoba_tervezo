@@ -1,7 +1,20 @@
+:root {
+    --title-background: cadetblue;
+    --block-background: burlywood;
+    --body-background: beige;
+    --text-general: darkred;
+    --text-title: black;
+    --text-button: white;
+    --button-background: blue;
+    --input-background: blanchedalmond;
+    --opening-label-background: black;
+    --room-visual-background: rgb(0, 110, 5);
+}
+
 body {
     padding-top: 5vh;
     font-family: Arial, Helvetica, sans-serif;
-    background-color:beige;
+    background-color:var(--body-background);
 }
 
 .container {
@@ -16,16 +29,16 @@ body {
     display: inline-block;
     text-align: center;
     width: 100%;
-    background-color: cadetblue;
+    background-color: var(--title-background);
     border-radius: 20px;
 }
 
 .block {
     border-radius: 20px;
-    color: darkred;
+    color: var(--text-general);
     display: inline-block;
     width: 90%;
-    background-color:burlywood;
+    background-color:var(--block-background);
     margin-top: 2vh;
     padding-left: 5%;
     padding-right: 5%;
@@ -56,7 +69,7 @@ body {
 .labels {
     display: inline-block;
     padding: 5px;
-    background-color: blanchedalmond;
+    background-color: var(--input-background);
     padding-bottom: 20px;
     margin-bottom: -15px;
     border-radius: 10px;
@@ -66,7 +79,7 @@ body {
     border: 0;
     display: inline-block;
     width: 90%;
-    background-color: blanchedalmond;
+    background-color: var(--input-background);
     padding: 5px;
     border-radius: 10px;
     
@@ -78,9 +91,9 @@ body {
 
 .button {
     margin: 10px;
-    background-color: blue;
+    background-color: var(--button-background);
     padding: 7px;
-    color: white;
+    color: var(--text-button);
     border: 0;
     border-radius: 10px;
 }
@@ -97,7 +110,7 @@ body {
     text-align: center;
     flex: 1;
     width: 100%;
-    background-color: rgb(0, 110, 5);
+    background-color: var(--room-visual-background);
     border-radius: 20px;
     padding: 10px;
 }
@@ -167,8 +180,8 @@ body {
 }
 
 .opening_label {
-    background-color: black;
-    color: white;
+    background-color: var(--opening-label-background);
+    color: var(--text-button);
 }
 
 @media screen and (min-width: 1200px) {
