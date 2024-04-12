@@ -136,3 +136,7 @@ function SizeRoom(side1,side2) {
     document.getElementById("room").style.width = String(boxwidth*0.8)+"px"
     document.getElementById("room").style.marginTop = String(topmargin)+"px"
 }
+
+function DeleteOpening(type,num) {
+    
+}
