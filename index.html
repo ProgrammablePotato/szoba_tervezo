@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Szoba tervező</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1 id="title">Szoba Tervező</h1>
+        </div>
+        <div class="block" id="makers"><b>Készítette:<br>Mihelik Tamás, Molnár Bence, Tóth Tamás</b></div>
+        <div class="block">
+            <p class="description">Tervezz egy szobát az egyszerű weboldalunkkal. Megadhatod a szoba alapméreteit, majd a nyílászárók mennyiségét és méreteit, és az oldal kiszámolja a szoba belső felületeit.</p>
+            <p>A szoba kötelező adatai a hossza, szélessége és a magassága. Ezen kívül meg adhatsz több ajtót és ablakot amik mérete le lesz vonva a fal belső felületéből. Ezek megadása után a <b>"Számítás"</b> gombbal tudod kiszámítani az adatokat.</p>
+        </div>
+        <div class="block" id="input-block">
+            <div class="input-general">
+                <div class="input-field">
+                    <label for="" class="labels">Szoba egyik oldalának hossza:</label>
+                    <input type="number" class="inputs" id="Side1" required>
+                </div>
+                <div class="input-field">
+                    <label for="" class="labels">Másik oldal hossza:</label>
+                    <input type="number" class="inputs" id="Side2" required>
+                </div>
+                <div class="input-field">
+                    <label for="" class="labels">Szoba magassága:</label>
+                    <input type="number" class="inputs" id="Height" required>
+                </div>
+                <button class="button" id="accept_button">Számítás</button>
+                <section id="wrong_input">Kérlek megfelelő adatokat adj meg</section>
+                <div class="results">
+                    <label for="" id="floor_area" class="labels"></label>
+                    <label for="" id="wall_area" class="labels"></label>
+                </div>
+            </div>
+            <div id="room-drawing">
+                <div class="testhouse"></div>
+                <div id="room"></div>
+            </div>
+            
+        </div>
+        <div class="block">
+            <button class="button" id="dooradd">Ajtó hozzáadása</button>
+            <button class="button" id="windowadd">Ablak hozzáadása</button>
+            <ul class="list" id="openings">
+                
+            </ul>
+        </div>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
