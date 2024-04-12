@@ -6,6 +6,10 @@ const DoorButton = document.getElementById("dooradd")
 const WindowButton = document.getElementById("windowadd")
 const RoomDrawing = document.getElementById("room-drawing")
 
+Side1in.value = 0
+Side2in.value = 0
+Heightin.value = 0
+
 var floor_area = 0
 var wall_area = 0
 var doors = 0
@@ -118,11 +122,16 @@ function AddOpening(type) {
                 <label for="" class="labels">Szélesség:</label>
                 <input type="number" class="inputs" id="${name2}_width_${count}" required>
             </div>
-            <button class="button" id="${name2}_button_${count}" onclick=DeleteOpening(${type},${count})>Törlés</button>
+            <button class="button" id="${name2}_button_${count}">Törlés</button>
         </div>
     </li>
     `
     document.getElementById("openings").innerHTML += NewOpening
+    document.getElementById(`${name2}_button_${count}`).addEventListener("click", () => {
+        DeleteOpening(type,count)
+    })
+    document.getElementById(`${name2}_height_${count}`).value = 0
+    document.getElementById(`${name2}_width_${count}`).value = 0
 }
 
 function SizeRoom(side1,side2) {
@@ -142,13 +151,11 @@ function DeleteOpening(type,count) {
     if (type == 1) {
         var name = "Ajtó"
         var name2 = "door"
-        doors -= 1
         var amount = doors
     }
     else if (type == 2) {
         var name = "Ablak"
         var name2 = "window"
-        windows -= 1
         var amount = windows
     }
     let id = `${name2}_${count}`
@@ -168,13 +175,25 @@ function DeleteOpening(type,count) {
         element.id = `${name2}_label_${i-1}`
         // height
         id = `${name2}_height_${i}`
+        element = document.getElementById(id)
         element.id = `${name2}_height_${i-1}`
         // width
         id = `${name2}_width_${i}`
+        element = document.getElementById(id)
         element.id = `${name2}_width_${i-1}`
         // button
         id = `${name2}_button_${i}`
-        element.onclick = DeleteOpening(type,i-1)
+        element = document.getElementById(id)
+        element.removeEventListener("click")
+        element.addEventListener("click", () => {
+            DeleteOpening(type,i-1)
+        })
         element.id = `${name2}_button_${i-1}`
+    }
+    if (type == 1) {
+        doors -= 1
+    }
+    else if (type == 2) {
+        windows -= 1
     }
 }
