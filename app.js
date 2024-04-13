@@ -34,13 +34,20 @@ function AutoResizeF() {
 }
 
 function Calc() {
-    
     var openings = doors+windows
     var openingarea = 0
 
     var side1 = Number(Side1in.value)
     var side2 = Number(Side2in.value)
     var height = Number(Heightin.value)
+    if (side1 <= 0 || side2 <= 0 || height <= 0) {
+        document.getElementById("wrong_input").style.display = "inline-block"
+        document.getElementById("wrong_input").innerHTML = `Az értékeknek 0-nál nagyobbnak kell lennie`
+        return 0
+    }
+    floor_area = side1*side2
+    wall_area = 2*(side1*height)+2*(side2*height)+floor_area
+
     SizeRoom(side1,side2)
 
     if (openings > 0) {
@@ -52,11 +59,21 @@ function Calc() {
                 document.getElementById("wrong_input").innerHTML = `Ajtó ${i} túl magas`
                 return 0
             }
+            if (thisheight <= 0) {
+                document.getElementById("wrong_input").style.display = "inline-block"
+                document.getElementById("wrong_input").innerHTML = `Ajtó ${i} értékeinek 0-nál nagyobbnak kell lenniük`
+                return 0
+            }
             ThisInput = document.getElementById("door_width_"+String(i))
             var thiswidth = Number(ThisInput.value)
             if (thiswidth > side1 && thiswidth > side2) {
                 document.getElementById("wrong_input").style.display = "inline-block"
                 document.getElementById("wrong_input").innerHTML = `Ajtó ${i} túl széles`
+                return 0
+            }
+            if (thiswidth <= 0) {
+                document.getElementById("wrong_input").style.display = "inline-block"
+                document.getElementById("wrong_input").innerHTML = `Ajtó ${i} értékeinek 0-nál nagyobbnak kell lenniük`
                 return 0
             }
             openingarea += (thiswidth*thisheight)
@@ -69,11 +86,21 @@ function Calc() {
                 document.getElementById("wrong_input").innerHTML = `Ablak ${i} túl magas`
                 return 0
             }
+            if (thisheight <= 0) {
+                document.getElementById("wrong_input").style.display = "inline-block"
+                document.getElementById("wrong_input").innerHTML = `Ablak ${i} értékeinek 0-nál nagyobbnak kell lenniük`
+                return 0
+            }
             ThisInput = document.getElementById("window_height_"+String(i))
             var thiswidth = Number(ThisInput.value)
-            if (thisheight > height) {
+            if (thiswidth > side1 && thiswidth > side2) {
                 document.getElementById("wrong_input").style.display = "inline-block"
                 document.getElementById("wrong_input").innerHTML = `Ablak ${i} túl magas`
+                return 0
+            }
+            if (thisheight <= 0) {
+                document.getElementById("wrong_input").style.display = "inline-block"
+                document.getElementById("wrong_input").innerHTML = `Ablak ${i} értékeinek 0-nál nagyobbnak kell lenniük`
                 return 0
             }
             openingarea += (thiswidth*thisheight)
@@ -85,9 +112,9 @@ function Calc() {
         document.getElementById("wrong_input").innerHTML = "Nyílászárók területe túl nagy!"
         return 0;
     }
-    
-    floor_area = side1*side2
-    wall_area = 2*(side1*height)+2*(side2*height)+floor_area-openingarea
+    else {
+        wall_area-=openingarea
+    }
     document.getElementById("floor_area").style.display = "inline-block"
     document.getElementById("floor_area").innerHTML = "A padló területe "+String(floor_area)+" m<sup>2</sup>"
     document.getElementById("wall_area").style.display = "inline-block"
